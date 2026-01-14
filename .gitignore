@@ -1,0 +1,20 @@
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# C++ / Arduino Build Artifacts
+*.hex
+*.bin
+*.elf
+*.o
+*.obj
+*.out
+*.exe
+
+# VS Code / PlatformIO (if you use them)
+.vscode/
+.pio/
+*.code-workspace
+
+# Arduino IDE specific
+build/
