@@ -11,7 +11,7 @@ Thumbs.db
 *.out
 *.exe
 
-# VS Code / PlatformIO (if you use them)
+# VS Code / PlatformIO 
 .vscode/
 .pio/
 *.code-workspace
