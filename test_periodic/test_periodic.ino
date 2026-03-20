@@ -214,9 +214,11 @@ void transducerPeriodic() {
   while (transducerState == true) {
     // "ON mode" means periodically turning on and off
     digitalWrite(TRANSDUCER_PIN, HIGH);
+    Serial.print("TRANSDUCER ON FOR 5 SECONDS");
     delay(500);
     digitalWrite(TRANSDUCER_PIN, LOW);
     delay(500);
+    Serial.print("TRANSDUCER OFF FOR 5 SECONDS");
   }
 }
 
