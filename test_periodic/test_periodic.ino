@@ -91,42 +91,15 @@ void setup() {
 void loop() {
   // --- READ INCOMING TARGETS FROM UI ---
   // Format expected: {34.0,65.0}
-  if (boardToBoard.available() > 0) {
-    if (boardToBoard.read() == '{') {
-      float incomingT = boardToBoard.parseFloat();
-      float incomingH = boardToBoard.parseFloat();
-      if (boardToBoard.read() == '}') {
-        Setpoint = incomingT;
-        targetHumidity = incomingH;
-        Serial.print(">>> NEW TARGETS RECEIVED: Temp = ");
-        Serial.print(Setpoint);
-        Serial.print("C | Hum = ");
-        Serial.println(targetHumidity);
 
-        Serial.println("Time\tT1\tT2\tT3\tT4\tT5\tT_Avg\tT_Target\tPWM\t|\tH1\tH2\tH3\tH4\tH5\tH_Avg\tH_Target\tHumi\tDehumi");
-        Serial.println("----\t--\t--\t--\t--\t--\t-----\t--------\t---\t \t--\t--\t--\t--\t--\t-----\t--------\t----\t------");
-      }
-    }
-  }
+
+
 
   // --- DATA ACQUISITION ---
   float totalTemp = 0, totalHum = 0;       
   int activeSensors = 0;     
   float avgHum = 0;
 
-  for (int i = 0; i < 5; i++) {
-    float temp = 0, hum = 0;
-    if (readAHT20(sensorBuses[i], temp, hum)) {
-      tReadings[i] = temp;
-      hReadings[i] = hum;
-      totalTemp += temp; 
-      totalHum += hum;
-      activeSensors++;                 
-    } else {
-      tReadings[i] = -999.0;
-      hReadings[i] = -999.0;
-    }
-  }
 
   // --- CONTROL PHASE ---
   if (activeSensors > 0) {
@@ -187,12 +160,7 @@ void loop() {
     Serial.print(millis() / 1000); 
     Serial.print("\t");
     
-    // Print Temperatures
-    for (int i = 0; i < 5; i++) {
-      if (tReadings[i] != -999.0) Serial.print(tReadings[i], 1); 
-      else Serial.print("ERR"); 
-      Serial.print("\t");
-    }
+
     
     // T_Avg
     if (activeSensors > 0) Serial.print(Input, 1);
@@ -204,12 +172,6 @@ void loop() {
     // T_Target
     Serial.print(Setpoint, 1);
 
-    // Print Humidities
-    for (int i = 0; i < 5; i++) {
-      if (hReadings[i] != -999.0) Serial.print(hReadings[i], 1); 
-      else Serial.print("ERR"); 
-      Serial.print("\t");
-    }
 
     // H_Avg
     if (activeSensors > 0) Serial.print(avgHum, 1);
