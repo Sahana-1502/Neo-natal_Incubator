@@ -185,3 +185,21 @@ void loop() {
   }
   delay(100); 
 }
+
+
+
+
+// TEST FUNCTION FOR REDUCING MIST RUNTIME AKA WATER SAVINGS 
+void transducerPeriodic() {
+  while (transducerState == true) {
+    // "ON mode" means periodically turning on and off
+    digitalWrite(TRANSDUCER_PIN, HIGH);
+    delay(500);
+    digitalWrite(TRANSDUCER_PIN, LOW);
+    delay(500);
+  }
+}
+
+// void dehumidifierPath() {
+  // code to turn servo motor enough to move slider
+// }
